@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Budget · 4 Graphs · Backend Sync · Sorted</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+        body { background: linear-gradient(145deg, #e9eff7, #dce5f0); padding: 1.5rem; }
+        .container { max-width: 1600px; margin: 0 auto; }
+        h1 { font-size: 1.6rem; margin-bottom: 0.25rem; }
+        .sub { color: #2c5282; font-size: 0.8rem; margin-bottom: 1.5rem; }
+
+        .stats-row { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
+        .stat-card { background: white; border-radius: 1.5rem; padding: 0.8rem 1.2rem; flex: 1; min-width: 120px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .stat-number { font-size: 1.5rem; font-weight: 800; }
+
+        .setup-card { background: #fff3e0; border-radius: 1.5rem; padding: 1rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: flex-end; }
+        .setup-card input { padding: 0.5rem; border-radius: 2rem; border: 1px solid #ccc; flex: 1; min-width: 200px; }
+        .setup-card button { background: #1f5e8e; color: white; border: none; padding: 0.5rem 1rem; border-radius: 2rem; cursor: pointer; }
+        .status-msg { padding: 0.5rem; border-radius: 1rem; margin-top: 0.5rem; font-size: 0.8rem; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+
+        .four-charts { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
+        .chart-card { background: white; border-radius: 1rem; padding: 0.6rem; flex: 1; min-width: 180px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+        canvas { max-height: 180px; width: 100%; }
+
+        .simulator-card { background: white; border-radius: 1rem; padding: 0.8rem; flex: 1; min-width: 200px; }
+        .simulator-control { margin: 0.5rem 0; }
+        .simulator-control input { width: 100%; padding: 0.3rem; border-radius: 1rem; border: 1px solid #ccc; }
+
+        .semester-section, .current-section { background: white; border-radius: 1.5rem; margin-bottom: 1.5rem; overflow-x: auto; }
+        .section-header { background: #f8fafd; padding: 0.8rem 1rem; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; flex-wrap: wrap; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+        th, td { padding: 0.6rem 0.5rem; text-align: left; border-bottom: 1px solid #ecf3f8; }
+        .clickable { cursor: pointer; }
+        .editable-value { background: #fef3d6; border-radius: 1rem; padding: 0.2rem 0.5rem; display: inline-block; cursor: pointer; }
+        .responsible-badge { cursor: pointer; display: inline-block; padding: 0.2rem 0.6rem; border-radius: 2rem; font-size: 0.7rem; font-weight: 600; }
+        .badge-pai { background: #d4e6f1; }
+        .badge-mae { background: #f5e0e9; }
+        .status-badge { cursor: pointer; display: inline-block; padding: 0.2rem 0.6rem; border-radius: 2rem; font-size: 0.7rem; font-weight: 600; }
+        .status-paid { background: #c8e6d9; }
+        .status-partial { background: #ffe0b3; }
+        .status-pending { background: #ffd9d4; }
+        .comment-cell { cursor: pointer; background: #f9f9fc; border-radius: 0.8rem; padding: 0.2rem 0.4rem; max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; position: relative; }
+        .comment-cell[data-fulltext]::after {
+            content: attr(data-fulltext);
+            position: absolute; background: #1e2f3f; color: white; padding: 4px 8px; border-radius: 8px; font-size: 0.7rem;
+            white-space: normal; max-width: 250px; z-index: 1000; bottom: 100%; left: 0; margin-bottom: 4px; opacity: 0; transition: opacity 0.2s; pointer-events: none;
+        }
+        .comment-cell:hover::after { opacity: 1; }
+        button { background: #1f5e8e; border: none; padding: 0.3rem 0.8rem; border-radius: 2rem; color: white; cursor: pointer; font-size: 0.7rem; }
+        .add-row { margin: 0.6rem; display: inline-block; font-size: 0.7rem; background: #eef3fc; padding: 0.2rem 0.8rem; border-radius: 2rem; cursor: pointer; }
+        .action-buttons { display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1rem; flex-wrap: wrap; }
+        footer { text-align: center; margin-top: 1.5rem; font-size: 0.7rem; color: #4a627a; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🎓 4‑Year College Budget · Secure Backend Sync</h1>
+    <div class="sub">✅ Paid | 🔸 Partial | 🔴 Pending | 💬 Hover comments | Sorted highest → lowest | 4 live graphs | Shareable & Fast</div>
+
+    <div class="setup-card" id="setupArea">
+        <input type="text" id="backendUrlInput" placeholder="Backend URL (http://localhost:3001)" style="flex:2">
+        <button id="saveBtn">Save & Load</button>
+        <button id="testBtn" style="background:#5b7f9e;">Test Connection</button>
+    </div>
+    <div id="statusMsg" class="status-msg"></div>
+
+    <div class="stats-row">
+        <div class="stat-card"><div class="stat-label">✅ Total Paid</div><div class="stat-number" id="totalPaid">$0</div></div>
+        <div class="stat-card"><div class="stat-label">🔸 Total Partial <span style="font-size:0.6rem;">(current semester)</span></div><div class="stat-number" id="totalPartial">$0</div></div>
+        <div class="stat-card"><div class="stat-label">⚠️ Total Pending</div><div class="stat-number" id="totalPending">$0</div></div>
+        <div class="stat-card"><div class="stat-label">👨‍👩 Grand Total</div><div class="stat-number" id="totalGrand">$0</div></div>
+    </div>
+
+    <!-- 4 Graphs -->
+    <div class="four-charts">
+        <div class="chart-card"><canvas id="overallChart"></canvas><p style="text-align:center; font-size:0.7rem;">📊 Overall (Paid/Partial/Pending)</p></div>
+        <div class="chart-card"><canvas id="paiChart"></canvas><p style="text-align:center; font-size:0.7rem;">👨 Pai: Paid/Partial/Pending</p></div>
+        <div class="chart-card"><canvas id="maeChart"></canvas><p style="text-align:center; font-size:0.7rem;">👩 Mãe: Paid/Partial/Pending</p></div>
+        <div class="chart-card"><canvas id="contribChart"></canvas><p style="text-align:center; font-size:0.7rem;">👨‍👩 Contribution (Pai / Mãe)</p></div>
+        <div class="simulator-card">
+            <h4>🧠 What‑If Simulator</h4>
+            <div class="simulator-control"><label>Monthly adjustment (USD):</label><input type="number" id="simMonthly" value="0" step="50"></div>
+            <div class="simulator-control"><label>Duration (months):</label><input type="number" id="simMonths" value="12"></div>
+            <button id="applySim">Apply</button> <button id="resetSim">Reset</button>
+            <div id="simMsg" style="margin-top:0.5rem; font-size:0.7rem;">No simulation</div>
+        </div>
+    </div>
+
+    <!-- Current semester -->
+    <div class="current-section">
+        <div class="section-header">
+            <strong>📌 CURRENT SEMESTER</strong>
+            <span><span id="currentSemesterName">Current</span> <button id="editSemesterNameBtn">✏️ Rename</button></span>
+        </div>
+        <div class="table-wrapper" style="padding:0.5rem;">
+            <table id="currentTable"><thead><tr><th>Expense</th><th>Parent</th><th>Amount</th><th>Status</th><th>Comment</th><th></th></tr></thead><tbody id="currentTbody"><tr><td colspan="6">Loading...</td></tr></tbody></table>
+            <div class="add-row" id="addCurrentBtn">+ Add expense to current semester</div>
+            <div style="margin:0.5rem;"><button id="clearCurrentBtn" style="background:#b16254;">🗑️ Clear all current expenses</button></div>
+        </div>
+    </div>
+
+    <!-- 4-year plan -->
+    <div id="fourYearContainer"><div style="text-align:center; padding:2rem;">Loading 4-year plan...</div></div>
+
+    <div class="action-buttons">
+        <button id="exportBtn">📎 Export CSV</button>
+        <button id="resetDefaultBtn">⟳ Reset 4‑year to default</button>
+    </div>
+    <footer>💡 No credentials exposed. Backend securely proxies all Airtable requests. Click any text to edit. Changes sync instantly.</footer>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
