@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-22T19:49:45.101Z",
+  "updatedAt": "2026-10-22T19:49:53.474Z",
   "currentSemester": {
     "name": "📌Summer 2026  (Current)",
     "expenses": []
@@ -671,7 +671,7 @@
         },
         {
           "desc": "Moradia Apt",
-          "amount": 5160,
+          "amount": 5400,
           "parent": "pai",
           "status": "pending",
           "comment": ""
