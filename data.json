@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-22T20:00:03.000Z",
+  "updatedAt": "2026-10-22T20:14:39.000Z",
   "currentSemester": {
     "name": "📌Summer 2026  (Current)",
     "expenses": []
@@ -339,14 +339,14 @@
         {
           "desc": "15 créditos",
           "amount": 16107,
-          "parent": "mae",
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Mercado",
           "amount": 1600,
-          "parent": "mae",
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         },
@@ -360,28 +360,28 @@
         {
           "desc": "IA",
           "amount": 80,
-          "parent": "mae",
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Spring Break (ônibus + 7 dias de comida)",
           "amount": 280,
-          "parent": "mae",
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Bônus GPA",
           "amount": 250,
-          "parent": "mae",
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "K Sig (Meal+, membro e moradia)",
           "amount": 5659,
-          "parent": "mae",
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         }
@@ -473,56 +473,56 @@
         {
           "desc": "15 créditos",
           "amount": 16107,
-          "parent": "pai",
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Moradia (apartamento)",
           "amount": 5160,
-          "parent": "pai",
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "K Sig (Meal+ e membro)",
           "amount": 2855,
-          "parent": "pai",
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Mercado",
           "amount": 1600,
-          "parent": "pai",
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Passagem (mai a ago)",
           "amount": 1100,
-          "parent": "pai",
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "IA",
           "amount": 80,
-          "parent": "pai",
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Spring Break (ônibus + 7 dias de comida)",
           "amount": 280,
-          "parent": "pai",
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Bônus GPA",
           "amount": 250,
-          "parent": "pai",
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         }
@@ -560,14 +560,14 @@
         {
           "desc": "Mercado",
           "amount": 1600,
-          "parent": "mae",
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Seguro saúde",
           "amount": 1500,
-          "parent": "mae",
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         },
@@ -581,7 +581,7 @@
         {
           "desc": "Thanksgiving (ônibus + 7 dias de comida)",
           "amount": 280,
-          "parent": "mae",
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         },
