@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-22T20:18:11.000Z",
+  "updatedAt": "2026-10-22T20:40:17.000Z",
   "currentSemester": {
     "name": "📌Summer 2026  (Current)",
     "expenses": []
@@ -439,7 +439,7 @@
         },
         {
           "desc": "Passagem (jan a dez)",
-          "amount": 1100,
+          "amount": 1300,
           "parent": "pai",
           "status": "pending",
           "comment": ""
@@ -500,7 +500,7 @@
         },
         {
           "desc": "Passagem (mai a ago)",
-          "amount": 1100,
+          "amount": 1300,
           "parent": "mae",
           "status": "pending",
           "comment": ""
@@ -522,7 +522,7 @@
         {
           "desc": "Bônus GPA",
           "amount": 250,
-          "parent": "mae",
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         }
@@ -573,7 +573,7 @@
         },
         {
           "desc": "Passagem (jan a dez)",
-          "amount": 1100,
+          "amount": 1300,
           "parent": "mae",
           "status": "pending",
           "comment": ""
