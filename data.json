@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-22T19:42:01.542Z",
+  "updatedAt": "2026-10-22T19:44:24.000Z",
   "currentSemester": {
     "name": "📌Summer 2026  (Current)",
     "expenses": []
@@ -454,21 +454,21 @@
         {
           "desc": "15 Creditos",
           "amount": 16549,
-          "parent": "pai",
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Moradia Apt",
           "amount": 5400,
-          "parent": "pai",
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "K Sig. (Meal+ Member)",
           "amount": 2855,
-          "parent": "pai",
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
@@ -482,7 +482,7 @@
         {
           "desc": "Health Insu.",
           "amount": 1500,
-          "parent": "pai",
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
@@ -496,56 +496,56 @@
         {
           "desc": "Mesada",
           "amount": 1000,
-          "parent": "pai",
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Student Edge + AI",
           "amount": 305,
-          "parent": "pai",
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "ThanksGiving (Onibus + 7 dias de comida)",
           "amount": 280,
-          "parent": "pai",
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Bonus GPA",
           "amount": 250,
-          "parent": "pai",
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Comida Fora",
           "amount": 236,
-          "parent": "pai",
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Barbeiro (3x Sem), Lavanderia, Livros",
           "amount": 188,
-          "parent": "pai",
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Compras/Farmacia",
           "amount": 165,
-          "parent": "pai",
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Uber",
           "amount": 30,
-          "parent": "pai",
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         }
@@ -557,21 +557,21 @@
         {
           "desc": "15 Creditos",
           "amount": 16549,
-          "parent": "mae",
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Moradia Apt",
           "amount": 5400,
-          "parent": "mae",
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "K Sig. (Meal+ Member)",
           "amount": 2855,
-          "parent": "mae",
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         },
@@ -585,7 +585,7 @@
         {
           "desc": "Ticket Dez-Jan",
           "amount": 1100,
-          "parent": "mae",
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         },
@@ -599,7 +599,7 @@
         {
           "desc": "Lavanderia, Barbeiro, Livros, Celular (ano)",
           "amount": 463,
-          "parent": "mae",
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         },
@@ -613,7 +613,7 @@
         {
           "desc": "Spring Break (Onibus + 7 dias de comida)",
           "amount": 280,
-          "parent": "mae",
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         },
@@ -627,7 +627,7 @@
         {
           "desc": "Comida Fora",
           "amount": 236,
-          "parent": "mae",
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         },
@@ -653,7 +653,7 @@
         {
           "desc": "Internship",
           "amount": 0,
-          "parent": "mae",
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         }
@@ -684,27 +684,6 @@
           "comment": ""
         },
         {
-          "desc": "Mercado P. Comida",
-          "amount": 1700,
-          "parent": "pai",
-          "status": "pending",
-          "comment": ""
-        },
-        {
-          "desc": "Mercado P. Comida",
-          "amount": 1700,
-          "parent": "pai",
-          "status": "pending",
-          "comment": ""
-        },
-        {
-          "desc": "Mercado",
-          "amount": 1700,
-          "parent": "pai",
-          "status": "pending",
-          "comment": ""
-        },
-        {
           "desc": "Health Insu.",
           "amount": 1500,
           "parent": "pai",
@@ -714,7 +693,7 @@
         {
           "desc": "Ticket Maio-Ago",
           "amount": 1100,
-          "parent": "mae",
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         },
