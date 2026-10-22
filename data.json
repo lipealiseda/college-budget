@@ -1,0 +1,875 @@
+{
+  "updatedAt": "2026-10-22T19:30:00.000Z",
+  "currentSemester": {
+    "name": "📌Summer 2026  (Current)",
+    "expenses": [
+      {
+        "desc": "Gastos Summer",
+        "amount": 174,
+        "parent": "pai",
+        "status": "partial",
+        "comment": "Chuteira + Show Joao Gomes"
+      },
+      {
+        "desc": "General Expenses",
+        "amount": 144,
+        "parent": "pai",
+        "status": "pending",
+        "comment": ""
+      },
+      {
+        "desc": "Mesada",
+        "amount": 100,
+        "parent": "pai",
+        "status": "pending",
+        "comment": ""
+      },
+      {
+        "desc": "Mesada",
+        "amount": 100,
+        "parent": "pai",
+        "status": "paid",
+        "comment": ""
+      },
+      {
+        "desc": "Mesada",
+        "amount": 200,
+        "parent": "pai",
+        "status": "pending",
+        "comment": ""
+      },
+      {
+        "desc": "13 Creditos",
+        "amount": 13,
+        "parent": "mae",
+        "status": "paid",
+        "comment": ""
+      },
+      {
+        "desc": "Mesada",
+        "amount": 100,
+        "parent": "pai",
+        "status": "partial",
+        "comment": ""
+      },
+      {
+        "desc": "Ad Hoc",
+        "amount": 30,
+        "parent": "pai",
+        "status": "partial",
+        "comment": "Chuteira (30), Sapato"
+      }
+    ]
+  },
+  "fourYear": [
+    {
+      "name": "🍂 Fall 2025 (Freshman)",
+      "expenses": [
+        {
+          "desc": "15 Creditos",
+          "amount": 16549,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Moradia Honors",
+          "amount": 4800,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "K Sig. (Meal+ Member)",
+          "amount": 2832,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Ad hoc: Matric/Visa/ Consul/ Preview/ Bike/Move/ Moch/Pledge/Leo",
+          "amount": 2696,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Health Insurance",
+          "amount": 1500,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Meal Plan + Flex",
+          "amount": 1320,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Comida",
+          "amount": 1179,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Mudança Passagem",
+          "amount": 331,
+          "parent": "pai",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Mesada",
+          "amount": 250,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Bonus GPA",
+          "amount": 250,
+          "parent": "pai",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Mesada",
+          "amount": 250,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Mercado/Farmacia",
+          "amount": 164,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Onibus/Viagens",
+          "amount": 139,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Uber",
+          "amount": 138,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Student Edge + AI",
+          "amount": 75,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Lavanderia",
+          "amount": 55,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        }
+      ]
+    },
+    {
+      "name": "🌸 Spring 2026 (Freshman)",
+      "expenses": [
+        {
+          "desc": "17 Creditos",
+          "amount": 18751,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Moradia Honors",
+          "amount": 4800,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "K Sig. (Meal+ Member)",
+          "amount": 2855,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Meal Plans + Flex",
+          "amount": 2300,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Ticket Dez-Jan",
+          "amount": 1100,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Lavanderia, Barbeiro, Celular, Livros",
+          "amount": 463,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Spring Break (Onibus + 7 dias de comida)",
+          "amount": 343,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Student Edge + AI",
+          "amount": 305,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Bonus GPA",
+          "amount": 250,
+          "parent": "pai",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Comida Fora",
+          "amount": 236,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Mercado/Farmacia",
+          "amount": 165,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Meu Niver + Storage (Presente Bella)",
+          "amount": 159,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Uber",
+          "amount": 30,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Mesada",
+          "amount": 0,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        }
+      ]
+    },
+    {
+      "name": "☀️ Summer 2026",
+      "expenses": [
+        {
+          "desc": "13 Creditos",
+          "amount": 13421,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Mesada",
+          "amount": 300,
+          "parent": "pai",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Outros",
+          "amount": 214,
+          "parent": "pai",
+          "status": "paid",
+          "comment": "Shoe Joao Gomes (144) + roupas (70)"
+        },
+        {
+          "desc": "Barbearia",
+          "amount": 28,
+          "parent": "pai",
+          "status": "paid",
+          "comment": ""
+        }
+      ]
+    },
+    {
+      "name": "🍂 Fall 2026 (Sophomore)",
+      "expenses": [
+        {
+          "desc": "15 Creditos",
+          "amount": 16107,
+          "parent": "pai",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "K Sig. (Meal+ Member + Moradia)",
+          "amount": 5659,
+          "parent": "pai",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Mercado P. Comida",
+          "amount": 1600,
+          "parent": "pai",
+          "status": "partial",
+          "comment": ""
+        },
+        {
+          "desc": "Health Insu.",
+          "amount": 1500,
+          "parent": "pai",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Ticket Jan- Dez",
+          "amount": 1487,
+          "parent": "pai",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Mesada",
+          "amount": 500,
+          "parent": "pai",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Bonus GPA",
+          "amount": 250,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Compras pro dorm na Frat (pai)",
+          "amount": 250,
+          "parent": "pai",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Compras pro Dorm na Frat (mae)",
+          "amount": 125,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Student Edge + AI",
+          "amount": 80,
+          "parent": "pai",
+          "status": "partial",
+          "comment": ""
+        }
+      ]
+    },
+    {
+      "name": "🌸 Spring 2027 (Sophomore)",
+      "expenses": [
+        {
+          "desc": "15 Creditos",
+          "amount": 16549,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Moradia K.SIG",
+          "amount": 2950,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "K Sig. (Meal+ Member)",
+          "amount": 2855,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Mercado P. Comida",
+          "amount": 1700,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Ticket Jan-Mai",
+          "amount": 1300,
+          "parent": "mae",
+          "status": "paid",
+          "comment": ""
+        },
+        {
+          "desc": "Mesada",
+          "amount": 1000,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Lavanderia, Barbeiro, Celular (ano), Livros",
+          "amount": 463,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Student Edge + AI",
+          "amount": 305,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Spring Break (Onibus + 7 dias de comida)",
+          "amount": 280,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Bonus GPA",
+          "amount": 250,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Comida Fora",
+          "amount": 236,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Compras/Farmacia",
+          "amount": 165,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Uber",
+          "amount": 30,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        }
+      ]
+    },
+    {
+      "name": "☀️ Summer 2027",
+      "expenses": [
+        {
+          "desc": "9 creditos",
+          "amount": 9927,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Mesada",
+          "amount": 400,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        }
+      ]
+    },
+    {
+      "name": "🍂 Fall 2027 (Junior)",
+      "expenses": [
+        {
+          "desc": "15 Creditos",
+          "amount": 16549,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Moradia Apt",
+          "amount": 5400,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "K Sig. (Meal+ Member)",
+          "amount": 2855,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Mercado P. Comida",
+          "amount": 1700,
+          "parent": "mae",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Health Insu.",
+          "amount": 1500,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Ticket Maio-Ago",
+          "amount": 1100,
+          "parent": "mae",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Mesada",
+          "amount": 1000,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Student Edge + AI",
+          "amount": 305,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "ThanksGiving (Onibus + 7 dias de comida)",
+          "amount": 280,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Bonus GPA",
+          "amount": 250,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Comida Fora",
+          "amount": 236,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Barbeiro (3x Sem), Lavanderia, Livros",
+          "amount": 188,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Compras/Farmacia",
+          "amount": 165,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Uber",
+          "amount": 30,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        }
+      ]
+    },
+    {
+      "name": "🌸 Spring 2028 (Junior)",
+      "expenses": [
+        {
+          "desc": "15 Creditos",
+          "amount": 16549,
+          "parent": "mae",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Moradia Apt",
+          "amount": 5400,
+          "parent": "mae",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "K Sig. (Meal+ Member)",
+          "amount": 2855,
+          "parent": "mae",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Mercado P. Comida",
+          "amount": 1700,
+          "parent": "mae",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Ticket Dez-Jan",
+          "amount": 1100,
+          "parent": "mae",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Mesada",
+          "amount": 1000,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Lavanderia, Barbeiro, Livros, Celular (ano)",
+          "amount": 463,
+          "parent": "mae",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Student Edge + AI",
+          "amount": 305,
+          "parent": "mae",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Spring Break (Onibus + 7 dias de comida)",
+          "amount": 280,
+          "parent": "mae",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Bonus GPA",
+          "amount": 250,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Comida Fora",
+          "amount": 236,
+          "parent": "mae",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Compras/Farmacia",
+          "amount": 165,
+          "parent": "mae",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Uber",
+          "amount": 30,
+          "parent": "mae",
+          "status": "pending",
+          "comment": ""
+        }
+      ]
+    },
+    {
+      "name": "☀️ Summer 2028",
+      "expenses": [
+        {
+          "desc": "Internship",
+          "amount": 0,
+          "parent": "mae",
+          "status": "pending",
+          "comment": ""
+        }
+      ]
+    },
+    {
+      "name": "🍂 Fall 2028 (Senior)",
+      "expenses": [
+        {
+          "desc": "6 creditos",
+          "amount": 6619,
+          "parent": "pai",
+          "status": "pending",
+          "comment": "Completa os 120 Creditos"
+        },
+        {
+          "desc": "Moradia Apt",
+          "amount": 5400,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Compras/Farmacia + Mercado P. Comida",
+          "amount": 1865,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Mercado P. Comida",
+          "amount": 1700,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Mercado P. Comida",
+          "amount": 1700,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Mercado P. Comida",
+          "amount": 1700,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Mercado P. Comida",
+          "amount": 1700,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Mercado",
+          "amount": 1700,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Health Insu.",
+          "amount": 1500,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Ticket Maio-Ago",
+          "amount": 1100,
+          "parent": "mae",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Mesada",
+          "amount": 1000,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "ThanksGiving (Onibus + 7 dias de comida)",
+          "amount": 280,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Livros, Lavenderia, Barbeiro, Uber",
+          "amount": 218,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Uber",
+          "amount": 30,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Barbeiro (3x Sem)",
+          "amount": 0,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Student Edge + AI",
+          "amount": 0,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "Moradia K.Sig.",
+          "amount": 0,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        }
+      ]
+    },
+    {
+      "name": "🌸 Spring 2029 (Senior)",
+      "expenses": [
+        {
+          "desc": "Moradia Apt",
+          "amount": 0,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        },
+        {
+          "desc": "15 Creditos",
+          "amount": 0,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        }
+      ]
+    },
+    {
+      "name": "☀️ Summer 2029",
+      "expenses": [
+        {
+          "desc": "Job",
+          "amount": 0,
+          "parent": "pai",
+          "status": "pending",
+          "comment": ""
+        }
+      ]
+    }
+  ]
+}

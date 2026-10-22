@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Budget · 4 Graphs · GitHub Sync · Sorted</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://api.github.com">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+        body { background: linear-gradient(145deg, #e9eff7, #dce5f0); padding: 1.5rem; }
+        .container { max-width: 1600px; margin: 0 auto; }
+        h1 { font-size: 1.6rem; margin-bottom: 0.25rem; }
+        .sub { color: #2c5282; font-size: 0.8rem; margin-bottom: 1.5rem; }
+
+        .sync-indicator { position: fixed; top: 20px; right: 20px; padding: 0.5rem 1rem; border-radius: 2rem; font-size: 0.75rem; font-weight: 600; z-index: 9999; background: #d4edda; color: #155724; }
+        .sync-indicator.syncing { background: #fff3cd; color: #856404; }
+        .sync-indicator.error { background: #f8d7da; color: #721c24; }
+
+        .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+        .stat-card { background: white; border-radius: 1.5rem; padding: 0.8rem 1.2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .stat-label { font-size: 0.85rem; color: #666; margin-bottom: 0.3rem; }
+        .stat-number { font-size: 1.5rem; font-weight: 800; }
+
+        .setup-card { background: #fff3e0; border-radius: 1.5rem; padding: 1rem; margin-bottom: 1.5rem; display: grid; grid-template-columns: 2fr 1fr auto auto; gap: 0.8rem; align-items: end; }
+        .setup-card input { padding: 0.5rem; border-radius: 2rem; border: 1px solid #ccc; }
+        .setup-card button { background: #1f5e8e; color: white; border: none; padding: 0.5rem 1rem; border-radius: 2rem; cursor: pointer; white-space: nowrap; }
+        .status-msg { padding: 0.5rem; border-radius: 1rem; margin-top: 0.5rem; font-size: 0.8rem; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .warning { background: #fff3cd; color: #856404; }
+
+        .four-charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+        .chart-card { background: white; border-radius: 1rem; padding: 0.6rem; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+        canvas { max-height: 180px; width: 100% !important; height: 180px !important; }
+
+        .simulator-card { background: white; border-radius: 1rem; padding: 0.8rem; }
+        .simulator-control { margin: 0.5rem 0; }
+        .simulator-control input { width: 100%; padding: 0.3rem; border-radius: 1rem; border: 1px solid #ccc; }
+
+        .semester-section, .current-section { background: white; border-radius: 1.5rem; margin-bottom: 1.5rem; overflow-x: auto; }
+        .section-header { background: #f8fafd; padding: 0.8rem 1rem; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .section-header-left { display: flex; gap: 0.5rem; align-items: center; }
+        .section-header-right { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+        th, td { padding: 0.6rem 0.5rem; text-align: left; border-bottom: 1px solid #ecf3f8; }
+        .editable-value { background: #fef3d6; border-radius: 1rem; padding: 0.2rem 0.5rem; display: inline-block; cursor: pointer; }
+        .responsible-badge { cursor: pointer; display: inline-block; padding: 0.2rem 0.6rem; border-radius: 2rem; font-size: 0.7rem; font-weight: 600; }
+        .badge-pai { background: #d4e6f1; }
+        .badge-mae { background: #f5e0e9; }
+        .status-badge { cursor: pointer; display: inline-block; padding: 0.2rem 0.6rem; border-radius: 2rem; font-size: 0.7rem; font-weight: 600; }
+        .status-paid { background: #c8e6d9; }
+        .status-partial { background: #ffe0b3; }
+        .status-pending { background: #ffd9d4; }
+        .comment-cell { cursor: pointer; background: #f9f9fc; border-radius: 0.8rem; padding: 0.2rem 0.4rem; max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .comment-cell::after {
+            content: attr(data-fulltext);
+            position: absolute; background: #1e2f3f; color: white; padding: 4px 8px; border-radius: 8px; font-size: 0.7rem;
+            white-space: normal; max-width: 250px; z-index: 1000; bottom: 100%; left: 0; margin-bottom: 4px; opacity: 0; transition: opacity 0.2s; pointer-events: none;
+        }
+        .comment-cell:hover::after { opacity: 1; }
+        button { background: #1f5e8e; border: none; padding: 0.3rem 0.8rem; border-radius: 2rem; color: white; cursor: pointer; font-size: 0.7rem; }
+        .add-row { margin: 0.6rem; display: inline-block; font-size: 0.7rem; background: #eef3fc; padding: 0.2rem 0.8rem; border-radius: 2rem; cursor: pointer; }
+        .action-buttons { display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1rem; flex-wrap: wrap; }
+        footer { text-align: center; margin-top: 1.5rem; font-size: 0.7rem; color: #4a627a; }
+
+        @media (max-width: 768px) {
+            .setup-card { grid-template-columns: 1fr; }
+            .four-charts { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+            .sync-indicator { top: 10px; right: 10px; font-size: 0.65rem; padding: 0.4rem 0.8rem; }
+            .section-header { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+<div class="sync-indicator" id="syncIndicator">✅ Ready</div>
+
+<div class="container">
+    <h1>🎓 4‑Year College Budget · GitHub Sync</h1>
+    <div class="sub">✅ Paid | 🔸 Partial | 🔴 Pending | 🔄 Real-time sync across all devices</div>
+
+    <div class="setup-card">
+        <input type="password" id="tokenInput" placeholder="GitHub token (github_pat...) · only needed to edit" autocomplete="off">
+        <input type="text" id="baseIdInput" placeholder="owner/repo">
+        <button id="saveBtn">Save & Load</button>
+        <button id="testBtn" style="background:#5b7f9e;">Test</button>
+    </div>
+    <div id="statusMsg" class="status-msg"></div>
+
+    <div class="stats-row">
+        <div class="stat-card"><div class="stat-label">✅ Paid</div><div class="stat-number" id="totalPaid">$0</div></div>
+        <div class="stat-card"><div class="stat-label">🔸 Partial</div><div class="stat-number" id="totalPartial">$0</div></div>
+        <div class="stat-card"><div class="stat-label">⚠️ Pending</div><div class="stat-number" id="totalPending">$0</div></div>
+        <div class="stat-card"><div class="stat-label">👨‍👩 Grand Total</div><div class="stat-number" id="totalGrand">$0</div></div>
+    </div>
+
+    <div class="four-charts">
+        <div class="chart-card"><canvas id="overallChart"></canvas><p style="text-align:center; font-size:0.7rem;">📊 Overall</p></div>
+        <div class="chart-card"><canvas id="paiChart"></canvas><p style="text-align:center; font-size:0.7rem;">👨 Pai</p></div>
+        <div class="chart-card"><canvas id="maeChart"></canvas><p style="text-align:center; font-size:0.7rem;">👩 Mãe</p></div>
+        <div class="chart-card"><canvas id="contribChart"></canvas><p style="text-align:center; font-size:0.7rem;">👨‍👩 Contrib</p></div>
+    </div>
+
+    <div class="simulator-card">
+        <h4>🧠 What‑If Simulator</h4>
+        <div class="simulator-control"><label>Monthly adjustment (USD):</label><input type="number" id="simMonthly" value="0" step="50"></div>
+        <div class="simulator-control"><label>Duration (months):</label><input type="number" id="simMonths" value="12"></div>
+        <button id="applySim">Apply</button> <button id="resetSim">Reset</button>
+        <div id="simMsg" style="margin-top:0.5rem; font-size:0.7rem;">No simulation</div>
+    </div>
+
+    <div class="current-section">
+        <div class="section-header">
+            <div class="section-header-left"><strong>📌 CURRENT SEMESTER</strong></div>
+            <div class="section-header-right"><span id="currentSemesterName">Current</span> <button id="editSemesterNameBtn">✏️</button></div>
+        </div>
+        <table id="currentTable"><thead><tr><th>Expense</th><th>Parent</th><th>Amt</th><th>Status</th><th>Note</th><th></th></tr></thead><tbody id="currentTbody"><tr><td colspan="6">Loading...</td></tr></tbody></table>
+        <div class="add-row" id="addCurrentBtn">+ Add expense</div>
+        <div style="margin:0.5rem;"><button id="clearCurrentBtn" style="background:#b16254;">🗑️ Clear</button></div>
+    </div>
+
+    <div id="fourYearContainer"><div style="text-align:center; padding:2rem;">Loading 4-year plan...</div></div>
+
+    <div class="action-buttons">
+        <button id="exportBtn">📎 Export CSV</button>
+        <button id="resetDefaultBtn">⟳ Reset 4‑year</button>
+    </div>
+    <footer>💡 Click text to edit. Changes sync instantly across all your devices. Add expenses to any semester.</footer>
+</div>
+
+<script>
+    function formatUSD(value) { return Math.round(value).toLocaleString('en-US'); }
+    function escapeHtml(str) { if (!str) return ''; const map = {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}; return String(str).replace(/[&<>"']/g, m => map[m]); }
+
+    // ---------- GitHub storage ----------
+    // All data lives in data.json inside this same GitHub repo.
+    // Anyone can VIEW. Editing needs a fine-grained GitHub token saved on your own device only.
+    function detectRepo() {
+        const host = location.hostname;
+        if (host.endsWith('.github.io')) {
+            const owner = host.split('.')[0];
+            const repo = location.pathname.split('/').filter(Boolean)[0] || host;
+            return `${owner}/${repo}`;
+        }
+        return 'alisedafilipe-cmyk/Budget';
+    }
+    let ACCESS_TOKEN = '';
+    try { ACCESS_TOKEN = localStorage.getItem('github_token') || ''; } catch (e) {}
+    let REPO = detectRepo();
+    try { REPO = localStorage.getItem('github_repo') || REPO; } catch (e) {}
+    const DATA_PATH = 'data.json';
+    const BRANCH = 'main';
+
+    let fourYearData = [];
+    let currentSemester = { name: "📌 Current Semester", expenses: [] };
+    let charts = {};
+    let syncTimeout = null;
+    let pollTimer = null;
+    let isSyncing = false;
+    let pendingSave = false;
+    let fileSha = null;
+    let localUpdatedAt = '';
+    let lastKnownHash = null;
+
+    const POLL_EDITOR_MS = 20000;   // with token: 180 calls/hour, limit is 5000
+    const POLL_VIEWER_MS = 90000;   // without token: 40 calls/hour, limit is 60
+
+    function canEdit() { return !!ACCESS_TOKEN; }
+
+    function updateSyncIndicator(status = 'ready', message = null) {
+        const indicator = document.getElementById('syncIndicator');
+        indicator.className = 'sync-indicator';
+        if (status === 'syncing') {
+            indicator.className = 'sync-indicator syncing';
+            indicator.textContent = '🔄 Syncing...';
+        } else if (status === 'error') {
+            indicator.className = 'sync-indicator error';
+            indicator.textContent = message || '❌ Error';
+            setTimeout(() => updateSyncIndicator('ready'), 4000);
+        } else if (status === 'success') {
+            indicator.textContent = '✅ Synced';
+            setTimeout(() => updateSyncIndicator('ready'), 1000);
+        } else {
+            indicator.textContent = canEdit() ? '✅ Ready' : '👀 View only';
+        }
+    }
+
+    function computeHash(data) {
+        try {
+            return JSON.stringify(data).split('').reduce((a, b) => ((a << 5) - a) + b.charCodeAt(0), 0).toString();
+        } catch { return 'error'; }
+    }
+
+    // UTF-8 safe base64 (the data has emojis and accents)
+    function b64ToUtf8(b64) {
+        const bin = atob(b64.replace(/\s/g, ''));
+        const bytes = new Uint8Array(bin.length);
+        for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+        return new TextDecoder('utf-8').decode(bytes);
+    }
+    function utf8ToB64(str) {
+        const bytes = new TextEncoder().encode(str);
+        let bin = '';
+        for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+        return btoa(bin);
+    }
+
+    function apiUrl() { return `https://api.github.com/repos/${REPO}/contents/${DATA_PATH}`; }
+    function apiHeaders(withAuth) {
+        const h = { 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
+        if (withAuth && ACCESS_TOKEN) h['Authorization'] = `Bearer ${ACCESS_TOKEN}`;
+        return h;
+    }
+
+    // Returns { data, sha } or throws
+    async function fetchRemote() {
+        // 1) GitHub API (freshest copy)
+        try {
+            const res = await fetch(`${apiUrl()}?ref=${BRANCH}`, { headers: apiHeaders(true), cache: 'no-store' });
+            if (res.ok) {
+                const j = await res.json();
+                return { data: JSON.parse(b64ToUtf8(j.content)), sha: j.sha };
+            }
+            if (res.status === 401) throw new Error('Token not valid or expired');
+            if (res.status === 404 && canEdit()) throw new Error('data.json not found (check repo name / token access)');
+        } catch (err) {
+            if (canEdit()) throw err;
+        }
+        // 2) Fallback for viewers: the copy served by GitHub Pages (no rate limit, can lag ~1 min)
+        const res2 = await fetch(`${DATA_PATH}?t=${Date.now()}`, { cache: 'no-store' });
+        if (!res2.ok) throw new Error(`Could not load data (HTTP ${res2.status})`);
+        return { data: await res2.json(), sha: null };
+    }
+
+    function applyData(data) {
+        const map = new Map();
+        for (const s of (data.fourYear || [])) map.set(s.name, s.expenses || []);
+        const clean = (e) => ({
+            id: null,
+            desc: e.desc || '',
+            amount: typeof e.amount === 'number' ? e.amount : parseFloat(e.amount) || 0,
+            parent: e.parent === 'mae' ? 'mae' : 'pai',
+            status: ['paid', 'partial', 'pending'].includes(e.status) ? e.status : 'pending',
+            comment: e.comment || ''
+        });
+        const names = [...fourYearSemesters];
+        for (const n of map.keys()) if (!names.includes(n)) names.push(n); // never hide unknown semesters
+        fourYearData = names.map(n => {
+            const exps = (map.get(n) || []).map(clean);
+            exps.sort((a, b) => b.amount - a.amount);
+            return { id: n, name: n, expenses: exps };
+        });
+        const cs = data.currentSemester || {};
+        currentSemester = { name: cs.name || '📌 Current Semester', expenses: (cs.expenses || []).map(clean) };
+        localUpdatedAt = data.updatedAt || '';
+        lastKnownHash = computeHash({ fourYearData, currentSemester });
+    }
+
+    function buildData() {
+        const strip = (e) => ({ desc: e.desc, amount: e.amount, parent: e.parent, status: e.status, comment: e.comment || '' });
+        return {
+            updatedAt: new Date().toISOString(),
+            currentSemester: { name: currentSemester.name, expenses: currentSemester.expenses.map(strip) },
+            fourYear: fourYearData.map(s => ({ name: s.name, expenses: s.expenses.map(strip) }))
+        };
+    }
+
+    async function putRemote(data, sha) {
+        const body = {
+            message: `Budget update ${new Date().toLocaleString('en-US')}`,
+            content: utf8ToB64(JSON.stringify(data, null, 2) + '\n'),
+            branch: BRANCH
+        };
+        if (sha) body.sha = sha;
+        const res = await fetch(apiUrl(), {
+            method: 'PUT',
+            headers: { ...apiHeaders(true), 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+            const t = await res.text();
+            const err = new Error(`HTTP ${res.status}: ${t.slice(0, 200)}`);
+            err.status = res.status;
+            throw err;
+        }
+        return (await res.json()).content.sha;
+    }
+
+    async function syncToCloud() {
+        if (!canEdit()) return;
+        if (isSyncing) { pendingSave = true; return; }
+        isSyncing = true;
+        pendingSave = false;
+        updateSyncIndicator('syncing');
+        const data = buildData();
+        try {
+            try {
+                fileSha = await putRemote(data, fileSha);
+            } catch (err) {
+                // File changed on GitHub since we loaded it (409/422): grab the new sha and save again
+                if (err.status === 409 || err.status === 422) {
+                    const remote = await fetchRemote();
+                    fileSha = await putRemote(data, remote.sha);
+                } else throw err;
+            }
+            localUpdatedAt = data.updatedAt;
+            lastKnownHash = computeHash({ fourYearData, currentSemester });
+            updateSyncIndicator('success');
+        } catch (err) {
+            console.error('Sync error:', err);
+            pendingSave = true; // keep the change and retry
+            updateSyncIndicator('error', '❌ Not saved, retrying');
+            setTimeout(() => { if (pendingSave) syncToCloud(); }, 5000);
+        } finally {
+            isSyncing = false;
+            if (pendingSave && !syncTimeout) debouncedSync();
+        }
+    }
+
+    async function debouncedSync() {
+        clearTimeout(syncTimeout);
+        pendingSave = true;
+        syncTimeout = setTimeout(() => { syncTimeout = null; syncToCloud(); }, 1500);
+    }
+
+    async function pollForRemoteChanges() {
+        if (isSyncing || pendingSave || document.hidden) return;
+        try {
+            const { data, sha } = await fetchRemote();
+            if (isSyncing || pendingSave) return; // user edited while we were fetching
+            if (sha) fileSha = sha;
+            // ignore older copies (GitHub Pages can lag behind a fresh save)
+            if (localUpdatedAt && data.updatedAt && data.updatedAt < localUpdatedAt) return;
+            const before = lastKnownHash;
+            applyData(data);
+            if (before !== lastKnownHash) {
+                renderFourYear();
+                renderCurrent();
+                updateTotalsUI();
+                updateSyncIndicator('success');
+            }
+        } catch (err) {
+            console.error('Poll error:', err);
+        }
+    }
+
+    function startPolling() {
+        if (pollTimer) clearInterval(pollTimer);
+        pollTimer = setInterval(pollForRemoteChanges, canEdit() ? POLL_EDITOR_MS : POLL_VIEWER_MS);
+    }
+
+    async function loadData() {
+        const { data, sha } = await fetchRemote();
+        fileSha = sha;
+        applyData(data);
+        startPolling();
+        return true;
+    }
+
+    // Viewers (no token) can look but not change anything
+    document.addEventListener('click', (ev) => {
+        if (canEdit()) return;
+        const t = ev.target.closest('.editable-value, .responsible-badge, .status-badge, .comment-cell, .add-row, td button, #clearCurrentBtn, #resetDefaultBtn, #editSemesterNameBtn');
+        if (!t) return;
+        ev.stopPropagation();
+        ev.preventDefault();
+        document.getElementById('statusMsg').innerHTML = '<span class="warning">👀 View only. Add the GitHub token on this device to edit.</span>';
+    }, true);
+
+    const fourYearSemesters = [
+        "🍂 Fall 2025 (Freshman)", "🌸 Spring 2026 (Freshman)", "☀️ Summer 2026",
+        "🍂 Fall 2026 (Sophomore)", "🌸 Spring 2027 (Sophomore)", "☀️ Summer 2027",
+        "🍂 Fall 2027 (Junior)", "🌸 Spring 2028 (Junior)", "☀️ Summer 2028",
+        "🍂 Fall 2028 (Senior)", "🌸 Spring 2029 (Senior)", "☀️ Summer 2029"
+    ];
+
+    function getDefaultFourYear() {
+        const result = [];
+        for (let name of fourYearSemesters) result.push({ id: name, name, expenses: [] });
+        
+        result[0].expenses = [
+            { id: null, desc: "15 Creditos", amount: 16549, parent: "pai", status: "paid", comment: "" },
+            { id: null, desc: "Moradia Honors", amount: 4800, parent: "pai", status: "paid", comment: "" },
+            { id: null, desc: "K Sig. (Meal+)", amount: 2832, parent: "pai", status: "paid", comment: "" },
+            { id: null, desc: "Mesada", amount: 250, parent: "mae", status: "paid", comment: "" },
+            { id: null, desc: "Outros", amount: 581, parent: "mae", status: "paid", comment: "" }
+        ];
+        
+        result[1].expenses = [
+            { id: null, desc: "17 Creditos", amount: 18751, parent: "pai", status: "paid", comment: "" },
+            { id: null, desc: "Moradia Honors", amount: 4800, parent: "pai", status: "paid", comment: "" },
+            { id: null, desc: "Mesada", amount: 100, parent: "mae", status: "paid", comment: "" },
+            { id: null, desc: "Outros", amount: 150, parent: "mae", status: "paid", comment: "" }
+        ];
+        
+        result[2].expenses = [
+            { id: null, desc: "Tuition & Housing", amount: 20000, parent: "pai", status: "pending", comment: "estimate" }
+        ];
+        
+        const fall2026Template = [
+            { id: null, desc: "15 Creditos", amount: 16549, parent: "pai", status: "pending", comment: "" },
+            { id: null, desc: "Moradia K.Sig", amount: 2950, parent: "pai", status: "pending", comment: "" },
+            { id: null, desc: "K Sig. (Meal+ Member)", amount: 2855, parent: "pai", status: "pending", comment: "" },
+            { id: null, desc: "Mercado P. Comida", amount: 1700, parent: "pai", status: "pending", comment: "" },
+            { id: null, desc: "Health Insu.", amount: 1500, parent: "pai", status: "pending", comment: "" },
+            { id: null, desc: "Ticket Ago-Dez", amount: 1100, parent: "mae", status: "paid", comment: "" },
+            { id: null, desc: "Mesada", amount: 1000, parent: "pai", status: "pending", comment: "" },
+            { id: null, desc: "Student Edge + AI", amount: 305, parent: "pai", status: "pending", comment: "" },
+            { id: null, desc: "Bonus GPA", amount: 250, parent: "pai", status: "pending", comment: "" },
+            { id: null, desc: "Comida Fora", amount: 236, parent: "pai", status: "pending", comment: "" },
+            { id: null, desc: "Lavanderia, Barbeiro (3x Sem, Celular ano, Livros", amount: 188, parent: "pai", status: "pending", comment: "" },
+            { id: null, desc: "Compras/Farmacia", amount: 165, parent: "pai", status: "pending", comment: "" },
+            { id: null, desc: "Compras pro Dorm na Frat", amount: 125, parent: "mae", status: "paid", comment: "" },
+            { id: null, desc: "Uber", amount: 30, parent: "pai", status: "pending", comment: "" }
+        ];
+        
+        result[3].expenses = JSON.parse(JSON.stringify(fall2026Template));
+        
+        for (let i = 4; i < result.length; i++) {
+            result[i].expenses = JSON.parse(JSON.stringify(fall2026Template));
+        }
+        
+        return result;
+    }
+
+    function computeTotals() {
+        let paid = 0, partial = 0, pending = 0;
+        const proc = (exps) => {
+            for (let e of exps) {
+                if (e.status === 'paid') paid += e.amount;
+                else if (e.status === 'partial') partial += e.amount;
+                else pending += e.amount;
+            }
+        };
+        for (let sem of fourYearData) proc(sem.expenses);
+        proc(currentSemester.expenses);
+        return { paid, partial, pending };
+    }
+
+    function computeParentDetails() {
+        let paiPaid=0, paiPartial=0, paiPending=0, maePaid=0, maePartial=0, maePending=0;
+        const proc = (e) => {
+            if (e.parent === 'pai') {
+                if (e.status === 'paid') paiPaid += e.amount;
+                else if (e.status === 'partial') paiPartial += e.amount;
+                else paiPending += e.amount;
+            } else {
+                if (e.status === 'paid') maePaid += e.amount;
+                else if (e.status === 'partial') maePartial += e.amount;
+                else maePending += e.amount;
+            }
+        };
+        for (let sem of fourYearData) for (let e of sem.expenses) proc(e);
+        for (let e of currentSemester.expenses) proc(e);
+        return { paiPaid, paiPartial, paiPending, maePaid, maePartial, maePending };
+    }
+
+    function destroyAllCharts() {
+        for (let key in charts) {
+            if (charts[key]) {
+                charts[key].destroy();
+                charts[key] = null;
+            }
+        }
+        charts = {};
+    }
+
+    function updateAllCharts() {
+        destroyAllCharts();
+        
+        let { paid, partial, pending } = computeTotals();
+        let { paiPaid, paiPartial, paiPending, maePaid, maePartial, maePending } = computeParentDetails();
+
+        charts.overall = new Chart(document.getElementById('overallChart'), {
+            type: 'doughnut',
+            data: { labels: ['Paid','Partial','Pending'], datasets: [{ data: [paid,partial,pending], backgroundColor: ['#2c6e9e','#f4a261','#e9a23b'] }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { font: { size: 10 } } } } }
+        });
+        charts.pai = new Chart(document.getElementById('paiChart'), {
+            type: 'doughnut',
+            data: { labels: ['Paid','Partial','Pending'], datasets: [{ data: [paiPaid,paiPartial,paiPending], backgroundColor: ['#2c6e9e','#f4a261','#e9a23b'] }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { font: { size: 10 } } } } }
+        });
+        charts.mae = new Chart(document.getElementById('maeChart'), {
+            type: 'doughnut',
+            data: { labels: ['Paid','Partial','Pending'], datasets: [{ data: [maePaid,maePartial,maePending], backgroundColor: ['#d96c8e','#e9b3c2','#e9a23b'] }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { font: { size: 10 } } } } }
+        });
+        let totalPai = paiPaid+paiPartial+paiPending;
+        let totalMae = maePaid+maePartial+maePending;
+        charts.contrib = new Chart(document.getElementById('contribChart'), {
+            type: 'doughnut',
+            data: { labels: ['Pai','Mãe'], datasets: [{ data: [totalPai,totalMae], backgroundColor: ['#2c6e9e','#d96c8e'] }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { font: { size: 10 } } } } }
+        });
+    }
+
+    function updateTotalsUI() {
+        let { paid, partial, pending } = computeTotals();
+        document.getElementById('totalPaid').innerHTML = `$${formatUSD(paid)}`;
+        document.getElementById('totalPartial').innerHTML = `$${formatUSD(partial)}`;
+        document.getElementById('totalPending').innerHTML = `$${formatUSD(pending)}`;
+        document.getElementById('totalGrand').innerHTML = `$${formatUSD(paid+partial+pending)}`;
+        updateAllCharts();
+    }
+
+    function renderFourYear() {
+        const container = document.getElementById('fourYearContainer');
+        container.innerHTML = '';
+        for (let sem of fourYearData) {
+            const div = document.createElement('div');
+            div.className = 'semester-section';
+            let semTotal = sem.expenses.reduce((s,e)=>s+e.amount,0);
+            let semPai = sem.expenses.filter(e=>e.parent==='pai').reduce((s,e)=>s+e.amount,0);
+            let semMae = sem.expenses.filter(e=>e.parent==='mae').reduce((s,e)=>s+e.amount,0);
+            div.innerHTML = `<div class="section-header"><div class="section-header-left"><strong>${escapeHtml(sem.name)}</strong></div><div class="section-header-right"><span>👨 $${formatUSD(semPai)} | 👩 $${formatUSD(semMae)} | 📆 $${formatUSD(semTotal)}</span></div></div><div class="table-wrapper"><table><thead><tr><th>Expense</th><th>Parent</th><th>Amount</th><th>Status</th><th>Comment</th><th></th></tr></thead><tbody id="tbody-${sem.id.replace(/[^a-z0-9]/gi,'_')}"></tbody></table></div><div class="add-row" onclick="addFourYearExpense('${sem.id}')">+ Add expense</div>`;
+            container.appendChild(div);
+            const tbody = div.querySelector('tbody');
+            for (let i=0; i<sem.expenses.length; i++) {
+                const e = sem.expenses[i];
+                const row = tbody.insertRow();
+                row.insertCell(0).innerHTML = `<span class="editable-value" onclick="editFourYearDesc('${sem.id}', ${i})">${escapeHtml(e.desc)}</span>`;
+                row.insertCell(1).innerHTML = `<span class="responsible-badge badge-${e.parent}" onclick="toggleFourYearParent('${sem.id}', ${i})">${e.parent==='pai'?'👨':'👩'}</span>`;
+                const statusClass = e.status==='paid'?'status-paid':(e.status==='partial'?'status-partial':'status-pending');
+                const statusText = e.status==='paid'?'✅':(e.status==='partial'?'🔸':'⚠️');
+                row.insertCell(2).innerHTML = `<span class="editable-value" onclick="editFourYearAmount('${sem.id}', ${i})">$${formatUSD(e.amount)}</span>`;
+                row.insertCell(3).innerHTML = `<span class="status-badge ${statusClass}" onclick="cycleFourYearStatus('${sem.id}', ${i})">${statusText}</span>`;
+                row.insertCell(4).innerHTML = `<span class="comment-cell" data-fulltext="${escapeHtml(e.comment)}" onclick="editFourYearComment('${sem.id}', ${i})">${escapeHtml(e.comment)}</span>`;
+                const delBtn = document.createElement('button');
+                delBtn.innerText = '✖'; delBtn.style.background = '#b16254';
+                delBtn.onclick = () => deleteFourYearExpense(sem.id, i);
+                row.insertCell(5).appendChild(delBtn);
+            }
+        }
+    }
+
+    function renderCurrent() {
+        const tbody = document.getElementById('currentTbody');
+        tbody.innerHTML = '';
+        for (let i=0; i<currentSemester.expenses.length; i++) {
+            const e = currentSemester.expenses[i];
+            const row = tbody.insertRow();
+            row.insertCell(0).innerHTML = `<span class="editable-value" onclick="editCurrentDesc(${i})">${escapeHtml(e.desc)}</span>`;
+            row.insertCell(1).innerHTML = `<span class="responsible-badge badge-${e.parent}" onclick="toggleCurrentParent(${i})">${e.parent==='pai'?'👨':'👩'}</span>`;
+            const statusClass = e.status==='paid'?'status-paid':(e.status==='partial'?'status-partial':'status-pending');
+            const statusText = e.status==='paid'?'✅':(e.status==='partial'?'🔸':'⚠️');
+            row.insertCell(2).innerHTML = `<span class="editable-value" onclick="editCurrentAmount(${i})">$${formatUSD(e.amount)}</span>`;
+            row.insertCell(3).innerHTML = `<span class="status-badge ${statusClass}" onclick="cycleCurrentStatus(${i})">${statusText}</span>`;
+            row.insertCell(4).innerHTML = `<span class="comment-cell" data-fulltext="${escapeHtml(e.comment)}" onclick="editCurrentComment(${i})">${escapeHtml(e.comment)}</span>`;
+            const delBtn = document.createElement('button');
+            delBtn.innerText = '✖'; delBtn.style.background = '#b16254';
+            delBtn.onclick = () => deleteCurrentExpense(i);
+            row.insertCell(5).appendChild(delBtn);
+        }
+        if (currentSemester.expenses.length===0) tbody.innerHTML = '<tr><td colspan="6">No expenses</td></tr>';
+        document.getElementById('currentSemesterName').innerText = currentSemester.name;
+    }
+
+    async function syncAndRender() {
+        renderFourYear(); 
+        renderCurrent(); 
+        updateTotalsUI();
+        await debouncedSync();
+    }
+
+    window.editFourYearDesc = async (semId, idx) => { 
+        let sem = fourYearData.find(s=>s.id===semId); 
+        if(sem && sem.expenses[idx]){ 
+            let v = prompt('Edit:', sem.expenses[idx].desc); 
+            if(v && v.trim()){ 
+                sem.expenses[idx].desc = v.trim(); 
+                await syncAndRender(); 
+            } 
+        } 
+    };
+    window.toggleFourYearParent = async (semId, idx) => { 
+        let sem = fourYearData.find(s=>s.id===semId); 
+        if(sem && sem.expenses[idx]){ 
+            sem.expenses[idx].parent = sem.expenses[idx].parent==='pai'?'mae':'pai'; 
+            await syncAndRender(); 
+        } 
+    };
+    window.editFourYearAmount = async (semId, idx) => { 
+        let sem = fourYearData.find(s=>s.id===semId); 
+        if(sem && sem.expenses[idx]){ 
+            let v = prompt('Amount:', sem.expenses[idx].amount); 
+            if(v && !isNaN(parseFloat(v))){ 
+                sem.expenses[idx].amount = Math.abs(parseFloat(v)); 
+                sem.expenses.sort((a,b)=>b.amount - a.amount); 
+                await syncAndRender(); 
+            } 
+        } 
+    };
+    window.cycleFourYearStatus = async (semId, idx) => { 
+        let sem = fourYearData.find(s=>s.id===semId); 
+        if(sem && sem.expenses[idx]){ 
+            let c = sem.expenses[idx].status; 
+            sem.expenses[idx].status = c==='paid'?'partial':(c==='partial'?'pending':'paid'); 
+            await syncAndRender(); 
+        } 
+    };
+    window.editFourYearComment = async (semId, idx) => { 
+        let sem = fourYearData.find(s=>s.id===semId); 
+        if(sem && sem.expenses[idx]){ 
+            let v = prompt('Comment:', sem.expenses[idx].comment||''); 
+            if(v!==null){ 
+                sem.expenses[idx].comment = v.trim(); 
+                await syncAndRender(); 
+            } 
+        } 
+    };
+    async function deleteFourYearExpense(semId, idx) { 
+        if(confirm('Delete?')){ 
+            let sem = fourYearData.find(s=>s.id===semId); 
+            if(sem) {
+                sem.expenses.splice(idx,1); 
+                await syncAndRender(); 
+            }
+        } 
+    }
+    window.addFourYearExpense = async (semId) => { 
+        let desc = prompt('Expense name:'); 
+        if(!desc) return; 
+        let amt = parseFloat(prompt('Amount:')); 
+        if(isNaN(amt)) return; 
+        let parent = prompt('Responsible (pai/mae):').toLowerCase(); 
+        if(parent!=='pai' && parent!=='mae') return; 
+        let comment = prompt('Comment:', ''); 
+        let sem = fourYearData.find(s=>s.id===semId); 
+        if(sem) {
+            sem.expenses.push({ id: null, desc, amount: amt, parent, status: 'pending', comment: comment||'' }); 
+            sem.expenses.sort((a,b)=>b.amount - a.amount); 
+            await syncAndRender(); 
+        }
+    }
+
+    window.editCurrentDesc = async (idx) => { 
+        if(currentSemester.expenses[idx]){
+            let v = prompt('Edit:', currentSemester.expenses[idx].desc); 
+            if(v && v.trim()){ 
+                currentSemester.expenses[idx].desc = v.trim(); 
+                await syncAndRender(); 
+            } 
+        }
+    };
+    window.toggleCurrentParent = async (idx) => { 
+        if(currentSemester.expenses[idx]){
+            currentSemester.expenses[idx].parent = currentSemester.expenses[idx].parent==='pai'?'mae':'pai'; 
+            await syncAndRender(); 
+        }
+    };
+    window.editCurrentAmount = async (idx) => { 
+        if(currentSemester.expenses[idx]){
+            let v = prompt('Amount:', currentSemester.expenses[idx].amount); 
+            if(v && !isNaN(parseFloat(v))){ 
+                currentSemester.expenses[idx].amount = Math.abs(parseFloat(v)); 
+                await syncAndRender(); 
+            } 
+        }
+    };
+    window.cycleCurrentStatus = async (idx) => { 
+        if(currentSemester.expenses[idx]){
+            let c = currentSemester.expenses[idx].status; 
+            currentSemester.expenses[idx].status = c==='paid'?'partial':(c==='partial'?'pending':'paid'); 
+            await syncAndRender(); 
+        }
+    };
+    window.editCurrentComment = async (idx) => { 
+        if(currentSemester.expenses[idx]){
+            let v = prompt('Comment:', currentSemester.expenses[idx].comment||''); 
+            if(v!==null){ 
+                currentSemester.expenses[idx].comment = v.trim(); 
+                await syncAndRender(); 
+            } 
+        }
+    };
+    async function deleteCurrentExpense(idx) { 
+        if(confirm('Delete?')){ 
+            currentSemester.expenses.splice(idx,1); 
+            await syncAndRender(); 
+        } 
+    }
+
+    function exportCSV() {
+        let rows = [['Type','Semester','Expense','Parent','Amount','Status','Comment']];
+        for (let sem of fourYearData) for (let e of sem.expenses) rows.push(['4-Year', sem.name, e.desc, e.parent, e.amount, e.status, e.comment||'']);
+        for (let e of currentSemester.expenses) rows.push(['Current', currentSemester.name, e.desc, e.parent, e.amount, e.status, e.comment||'']);
+        let csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+        let blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+        let link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'college_budget.csv';
+        link.click();
+    }
+
+    async function testConnection() {
+        const token = document.getElementById('tokenInput').value.trim();
+        const repo = document.getElementById('baseIdInput').value.trim() || detectRepo();
+        if (!token) { alert('Paste your GitHub token first'); return; }
+        document.getElementById('statusMsg').innerHTML = '<span class="warning">Testing...</span>';
+        try {
+            const res = await fetch(`https://api.github.com/repos/${repo}`, { headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json' }, cache: 'no-store' });
+            if (!res.ok) {
+                document.getElementById('statusMsg').innerHTML = `<span class="error">❌ ${res.status}: token can't see ${escapeHtml(repo)}</span>`;
+                return;
+            }
+            const j = await res.json();
+            if (j.permissions && j.permissions.push) {
+                document.getElementById('statusMsg').innerHTML = '<span class="success">✅ Success! Click "Save & Load"</span>';
+            } else {
+                document.getElementById('statusMsg').innerHTML = '<span class="error">❌ Token can read but not write. Give it Contents: Read and write.</span>';
+            }
+        } catch(e) {
+            document.getElementById('statusMsg').innerHTML = `<span class="error">❌ ${escapeHtml(e.message)}</span>`;
+        }
+    }
+
+    async function saveAndLoad() {
+        const token = document.getElementById('tokenInput').value.trim();
+        const repo = document.getElementById('baseIdInput').value.trim() || detectRepo();
+        try {
+            if (token) localStorage.setItem('github_token', token); else localStorage.removeItem('github_token');
+            localStorage.setItem('github_repo', repo);
+        } catch (e) {}
+        ACCESS_TOKEN = token;
+        REPO = repo;
+        await initialLoad();
+    }
+
+    async function initialLoad() {
+        document.getElementById('statusMsg').innerHTML = '<span class="warning">Loading...</span>';
+        try {
+            await loadData();
+            document.getElementById('statusMsg').innerHTML = canEdit()
+                ? '<span class="success">✅ Loaded from GitHub. Edits save automatically.</span>'
+                : '<span class="success">👀 Loaded from GitHub. View only, updates every 90 seconds.</span>';
+            renderFourYear();
+            renderCurrent();
+            updateTotalsUI();
+            updateSyncIndicator('ready');
+        } catch (err) {
+            console.error('Load error:', err);
+            document.getElementById('statusMsg').innerHTML = `<span class="error">❌ Failed to load: ${escapeHtml(err.message)}</span>`;
+        }
+    }
+
+    document.getElementById('saveBtn').addEventListener('click', saveAndLoad);
+    document.getElementById('testBtn').addEventListener('click', testConnection);
+    document.getElementById('addCurrentBtn').addEventListener('click', async () => { 
+        let desc = prompt('Name:'); 
+        if(desc) { 
+            let amt = parseFloat(prompt('Amount:')); 
+            if(!isNaN(amt)) { 
+                let parent = prompt('pai/mae?').toLowerCase(); 
+                if(parent==='pai' || parent==='mae') { 
+                    currentSemester.expenses.push({ id: null, desc, amount: amt, parent, status: 'pending', comment: '' }); 
+                    await syncAndRender(); 
+                } 
+            } 
+        } 
+    });
+    document.getElementById('editSemesterNameBtn').addEventListener('click', async () => { 
+        let newName = prompt('Name:', currentSemester.name); 
+        if(newName) { 
+            currentSemester.name = newName.trim(); 
+            await syncAndRender(); 
+        } 
+    });
+    document.getElementById('clearCurrentBtn').addEventListener('click', async () => { 
+        if(confirm('Clear all?')) { 
+            currentSemester.expenses = []; 
+            await syncAndRender(); 
+        } 
+    });
+    document.getElementById('exportBtn').addEventListener('click', exportCSV);
+    document.getElementById('resetDefaultBtn').addEventListener('click', async () => { 
+        if(confirm('Reset 4-year?')) { 
+            fourYearData = getDefaultFourYear(); 
+            await syncAndRender(); 
+        } 
+    });
+
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) pollForRemoteChanges();
+    });
+
+    window.addEventListener('beforeunload', (e) => {
+        if (pendingSave || isSyncing) { e.preventDefault(); e.returnValue = ''; }
+    });
+
+    document.getElementById('tokenInput').value = ACCESS_TOKEN;
+    document.getElementById('baseIdInput').value = REPO;
+    window.addEventListener('load', initialLoad);
+</script>
+</body>
+</html>
