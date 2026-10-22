@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-22T19:51:45.000Z",
+  "updatedAt": "2026-10-22T20:00:03.000Z",
   "currentSemester": {
     "name": "📌Summer 2026  (Current)",
     "expenses": []
@@ -325,7 +325,7 @@
           "comment": ""
         },
         {
-          "desc": "Study Edge + IA",
+          "desc": "IA",
           "amount": 80,
           "parent": "pai",
           "status": "partial",
@@ -338,29 +338,15 @@
       "expenses": [
         {
           "desc": "15 créditos",
-          "amount": 16549,
-          "parent": "pai",
-          "status": "pending",
-          "comment": ""
-        },
-        {
-          "desc": "Moradia (K Sig)",
-          "amount": 2950,
-          "parent": "pai",
-          "status": "pending",
-          "comment": ""
-        },
-        {
-          "desc": "K Sig (Meal+ e membro)",
-          "amount": 2855,
-          "parent": "pai",
+          "amount": 16107,
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Mercado",
-          "amount": 1700,
-          "parent": "pai",
+          "amount": 1600,
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
@@ -372,58 +358,30 @@
           "comment": ""
         },
         {
-          "desc": "Mesada",
-          "amount": 1000,
-          "parent": "pai",
-          "status": "pending",
-          "comment": ""
-        },
-        {
-          "desc": "Lavanderia, barbeiro, celular e livros",
-          "amount": 463,
-          "parent": "pai",
-          "status": "pending",
-          "comment": ""
-        },
-        {
-          "desc": "Study Edge + IA",
-          "amount": 305,
-          "parent": "pai",
+          "desc": "IA",
+          "amount": 80,
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Spring Break (ônibus + 7 dias de comida)",
           "amount": 280,
-          "parent": "pai",
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Bônus GPA",
           "amount": 250,
-          "parent": "pai",
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
         {
-          "desc": "Comida fora",
-          "amount": 236,
-          "parent": "pai",
-          "status": "pending",
-          "comment": ""
-        },
-        {
-          "desc": "Farmácia e compras",
-          "amount": 165,
-          "parent": "pai",
-          "status": "pending",
-          "comment": ""
-        },
-        {
-          "desc": "Uber",
-          "amount": 30,
-          "parent": "pai",
+          "desc": "K Sig (Meal+, membro e moradia)",
+          "amount": 5659,
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         }
@@ -434,14 +392,7 @@
       "expenses": [
         {
           "desc": "9 créditos",
-          "amount": 9927,
-          "parent": "pai",
-          "status": "pending",
-          "comment": ""
-        },
-        {
-          "desc": "Mesada",
-          "amount": 400,
+          "amount": 9664,
           "parent": "pai",
           "status": "pending",
           "comment": ""
@@ -453,99 +404,64 @@
       "expenses": [
         {
           "desc": "15 créditos",
-          "amount": 16549,
-          "parent": "mae",
+          "amount": 16107,
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Moradia (apartamento)",
           "amount": 5160,
-          "parent": "mae",
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "K Sig (Meal+ e membro)",
           "amount": 2855,
-          "parent": "mae",
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Mercado",
-          "amount": 1700,
-          "parent": "mae",
+          "amount": 1600,
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Seguro saúde",
           "amount": 1500,
-          "parent": "mae",
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         },
         {
-          "desc": "Passagem (mai a ago)",
+          "desc": "Passagem (jan a dez)",
           "amount": 1100,
-          "parent": "mae",
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         },
         {
-          "desc": "Mesada",
-          "amount": 1000,
-          "parent": "mae",
-          "status": "pending",
-          "comment": ""
-        },
-        {
-          "desc": "Study Edge + IA",
-          "amount": 305,
-          "parent": "mae",
+          "desc": "IA",
+          "amount": 80,
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Thanksgiving (ônibus + 7 dias de comida)",
           "amount": 280,
-          "parent": "mae",
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Bônus GPA",
           "amount": 250,
-          "parent": "mae",
-          "status": "pending",
-          "comment": ""
-        },
-        {
-          "desc": "Comida fora",
-          "amount": 236,
-          "parent": "mae",
-          "status": "pending",
-          "comment": ""
-        },
-        {
-          "desc": "Lavanderia, barbeiro e livros",
-          "amount": 188,
-          "parent": "mae",
-          "status": "pending",
-          "comment": ""
-        },
-        {
-          "desc": "Farmácia e compras",
-          "amount": 165,
-          "parent": "mae",
-          "status": "pending",
-          "comment": ""
-        },
-        {
-          "desc": "Uber",
-          "amount": 30,
-          "parent": "mae",
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         }
@@ -556,7 +472,7 @@
       "expenses": [
         {
           "desc": "15 créditos",
-          "amount": 16549,
+          "amount": 16107,
           "parent": "pai",
           "status": "pending",
           "comment": ""
@@ -577,36 +493,22 @@
         },
         {
           "desc": "Mercado",
-          "amount": 1700,
-          "parent": "mae",
+          "amount": 1600,
+          "parent": "pai",
           "status": "pending",
           "comment": ""
         },
         {
-          "desc": "Passagem (dez a jan)",
+          "desc": "Passagem (mai a ago)",
           "amount": 1100,
           "parent": "pai",
           "status": "pending",
           "comment": ""
         },
         {
-          "desc": "Mesada",
-          "amount": 1000,
+          "desc": "IA",
+          "amount": 80,
           "parent": "pai",
-          "status": "pending",
-          "comment": ""
-        },
-        {
-          "desc": "Lavanderia, barbeiro, celular e livros",
-          "amount": 463,
-          "parent": "pai",
-          "status": "pending",
-          "comment": ""
-        },
-        {
-          "desc": "Study Edge + IA",
-          "amount": 305,
-          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
@@ -621,27 +523,6 @@
           "desc": "Bônus GPA",
           "amount": 250,
           "parent": "pai",
-          "status": "pending",
-          "comment": ""
-        },
-        {
-          "desc": "Comida fora",
-          "amount": 236,
-          "parent": "pai",
-          "status": "pending",
-          "comment": ""
-        },
-        {
-          "desc": "Farmácia e compras",
-          "amount": 165,
-          "parent": "mae",
-          "status": "pending",
-          "comment": ""
-        },
-        {
-          "desc": "Uber",
-          "amount": 30,
-          "parent": "mae",
           "status": "pending",
           "comment": ""
         }
@@ -664,7 +545,7 @@
       "expenses": [
         {
           "desc": "6 créditos",
-          "amount": 6619,
+          "amount": 6443,
           "parent": "pai",
           "status": "pending",
           "comment": "Completa os 120 créditos"
@@ -677,64 +558,36 @@
           "comment": ""
         },
         {
-          "desc": "Mercado, farmácia e compras",
-          "amount": 1865,
-          "parent": "pai",
+          "desc": "Mercado",
+          "amount": 1600,
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Seguro saúde",
           "amount": 1500,
-          "parent": "pai",
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
         {
-          "desc": "Passagem (mai a ago)",
+          "desc": "Passagem (jan a dez)",
           "amount": 1100,
-          "parent": "pai",
-          "status": "pending",
-          "comment": ""
-        },
-        {
-          "desc": "Mesada",
-          "amount": 1000,
-          "parent": "pai",
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
         {
           "desc": "Thanksgiving (ônibus + 7 dias de comida)",
           "amount": 280,
-          "parent": "pai",
+          "parent": "mae",
           "status": "pending",
           "comment": ""
         },
         {
-          "desc": "Lavanderia, barbeiro, livros e Uber",
-          "amount": 218,
-          "parent": "pai",
-          "status": "pending",
-          "comment": ""
-        },
-        {
-          "desc": "Uber",
-          "amount": 30,
-          "parent": "pai",
-          "status": "pending",
-          "comment": ""
-        },
-        {
-          "desc": "Barbeiro (3x no semestre)",
-          "amount": 0,
-          "parent": "pai",
-          "status": "pending",
-          "comment": ""
-        },
-        {
-          "desc": "Study Edge + IA",
-          "amount": 0,
+          "desc": "IA",
+          "amount": 80,
           "parent": "pai",
           "status": "pending",
           "comment": ""
