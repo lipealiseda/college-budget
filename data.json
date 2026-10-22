@@ -1,51 +1,8 @@
 {
-  "updatedAt": "2026-10-22T19:22:24.840Z",
+  "updatedAt": "2026-10-22T19:22:39.090Z",
   "currentSemester": {
     "name": "📌Summer 2026  (Current)",
-    "expenses": [
-      {
-        "desc": "Gastos Summer",
-        "amount": 174,
-        "parent": "pai",
-        "status": "partial",
-        "comment": "Chuteira + Show Joao Gomes"
-      },
-      {
-        "desc": "General Expenses",
-        "amount": 144,
-        "parent": "pai",
-        "status": "pending",
-        "comment": ""
-      },
-      {
-        "desc": "Mesada",
-        "amount": 100,
-        "parent": "pai",
-        "status": "pending",
-        "comment": ""
-      },
-      {
-        "desc": "13 Creditos",
-        "amount": 13,
-        "parent": "mae",
-        "status": "paid",
-        "comment": ""
-      },
-      {
-        "desc": "Mesada",
-        "amount": 100,
-        "parent": "pai",
-        "status": "partial",
-        "comment": ""
-      },
-      {
-        "desc": "Ad Hoc",
-        "amount": 30,
-        "parent": "pai",
-        "status": "partial",
-        "comment": "Chuteira (30), Sapato"
-      }
-    ]
+    "expenses": []
   },
   "fourYear": [
     {
