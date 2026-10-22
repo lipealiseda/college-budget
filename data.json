@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-22T19:22:18.038Z",
+  "updatedAt": "2026-10-22T19:22:24.840Z",
   "currentSemester": {
     "name": "📌Summer 2026  (Current)",
     "expenses": [
@@ -22,13 +22,6 @@
         "amount": 100,
         "parent": "pai",
         "status": "pending",
-        "comment": ""
-      },
-      {
-        "desc": "Mesada",
-        "amount": 100,
-        "parent": "pai",
-        "status": "paid",
         "comment": ""
       },
       {
