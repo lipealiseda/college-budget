@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-22T20:14:39.000Z",
+  "updatedAt": "2026-10-22T20:18:11.000Z",
   "currentSemester": {
     "name": "📌Summer 2026  (Current)",
     "expenses": []
@@ -30,11 +30,11 @@
           "comment": ""
         },
         {
-          "desc": "Avulsos (matrícula, visto, consulado, Preview, bike, mudança, Moch, Pledge, Leo)",
+          "desc": "Gastos avulsos",
           "amount": 2696,
           "parent": "mae",
           "status": "paid",
-          "comment": ""
+          "comment": "matrícula, visto, consulado, Preview, bike, mudança, Moch, Pledge, Leo"
         },
         {
           "desc": "Seguro saúde",
@@ -161,18 +161,18 @@
           "comment": ""
         },
         {
-          "desc": "Lavanderia, barbeiro, celular e livros",
+          "desc": "Lavanderia e outros",
           "amount": 463,
           "parent": "mae",
           "status": "paid",
-          "comment": ""
+          "comment": "barbeiro, celular e livros"
         },
         {
-          "desc": "Spring Break (ônibus + 7 dias de comida)",
+          "desc": "Spring Break",
           "amount": 343,
           "parent": "mae",
           "status": "paid",
-          "comment": ""
+          "comment": "ônibus + 7 dias de comida"
         },
         {
           "desc": "Study Edge + IA",
@@ -203,11 +203,11 @@
           "comment": ""
         },
         {
-          "desc": "Aniversário + storage (presente Bella)",
+          "desc": "Aniversário + storage",
           "amount": 159,
           "parent": "mae",
           "status": "paid",
-          "comment": ""
+          "comment": "presente Bella"
         },
         {
           "desc": "Uber",
@@ -365,11 +365,11 @@
           "comment": ""
         },
         {
-          "desc": "Spring Break (ônibus + 7 dias de comida)",
+          "desc": "Spring Break",
           "amount": 280,
           "parent": "pai",
           "status": "pending",
-          "comment": ""
+          "comment": "ônibus + 7 dias de comida"
         },
         {
           "desc": "Bônus GPA",
@@ -452,11 +452,11 @@
           "comment": ""
         },
         {
-          "desc": "Thanksgiving (ônibus + 7 dias de comida)",
+          "desc": "Thanksgiving",
           "amount": 280,
           "parent": "pai",
           "status": "pending",
-          "comment": ""
+          "comment": "ônibus + 7 dias de comida"
         },
         {
           "desc": "Bônus GPA",
@@ -513,11 +513,11 @@
           "comment": ""
         },
         {
-          "desc": "Spring Break (ônibus + 7 dias de comida)",
+          "desc": "Spring Break",
           "amount": 280,
           "parent": "mae",
           "status": "pending",
-          "comment": ""
+          "comment": "ônibus + 7 dias de comida"
         },
         {
           "desc": "Bônus GPA",
@@ -579,11 +579,11 @@
           "comment": ""
         },
         {
-          "desc": "Thanksgiving (ônibus + 7 dias de comida)",
+          "desc": "Thanksgiving",
           "amount": 280,
           "parent": "pai",
           "status": "pending",
-          "comment": ""
+          "comment": "ônibus + 7 dias de comida"
         },
         {
           "desc": "IA",
